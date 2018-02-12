@@ -29,8 +29,11 @@ class ArticleController extends AbstractController
     public function show($slug)
     {
         $comments = [
-            'I ate normal rock'
+            'I ate normal rock',
+            'hi'
         ];
+
+//        dump($slug, $this, $comments);
 
         return $this->render('article/show.html.twig', [
             'title' => ucwords(str_replace('-',' ',$slug)),
