@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Read: {{ title }}{%  endblock %}
+
+{% block body %}
+
+<h1>{{ title }}</h1>
+
+<div>
+    <p>
+        Bacon ipsum dolor amet filet mignon picanha kielbasa jowl hamburger shankle biltong chicken turkey pastrami cupim pork chop. Chick
+    </p>
+
+    <p>
+        Pastrami short loin pork chop, chicken kielbasa swine turducken jerky short ribs beef. Short ribs alcatra shoulder, flank pork chop shan
+    </p>
+</div>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
