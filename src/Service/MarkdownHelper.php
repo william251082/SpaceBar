@@ -20,11 +20,11 @@ class MarkdownHelper
 //    private $isDebug;
 //
         // First 2 arguments in the constructor are autowired
-    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown, LoggerInterface $logger)
+    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown, LoggerInterface $markdownLogger)
     {
         $this->cache = $cache;
         $this->markdown = $markdown;
-        $this->logger = $logger;
+        $this->logger = $markdownLogger;
 //        $this->isDebug = $isDebug;
     }
 
