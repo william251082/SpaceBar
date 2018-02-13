@@ -59,6 +59,7 @@ strip steak pork belly aliquip capicola officia. Labore deserunt esse chicken lo
 cow est ribeye adipisicing. Pig hamburger pork belly enim. Do porchetta minim capicola irure pancetta chuck
 fugiat.
 EOF;
+        //dump($cache);die;
         // Create item in memory
         $item = $cache->getItem('markdown_'.md5($articleContent));
 
@@ -68,7 +69,7 @@ EOF;
             $cache->save($item);
         }
         $articleContent = $item->get();
-        dump($markdown);die;
+        //dump($markdown);die;
 
 
 //        dump($slug, $this, $comments);
