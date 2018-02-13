@@ -16,23 +16,23 @@ class MarkdownHelper
 {
     private $cache;
     private $markdown;
-//    private $logger;
+    private $logger;
 //    private $isDebug;
 //
-        // Arguments to the constructor are autowired
-    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown)
+        // First 2 arguments in the constructor are autowired
+    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown, LoggerInterface $logger)
     {
         $this->cache = $cache;
         $this->markdown = $markdown;
-//        $this->logger = $markdownLogger;
+        $this->logger = $logger;
 //        $this->isDebug = $isDebug;
     }
 
-    public function parse(string $source, AdapterInterface $cache, MarkdownInterface $markdown): string
+    public function parse(string $source): string
     {
-//        if (stripos($source, 'bacon') !== false) {
-//            $this->logger->info('They are talking about bacon again!');
-//        }
+        if (stripos($source, 'Doutz') !== false) {
+            $this->logger->info('Hi Doutz!');
+        }
 //
 //        // skip caching entirely in debug
 //        if ($this->isDebug) {
