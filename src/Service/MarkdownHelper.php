@@ -14,18 +14,19 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class MarkdownHelper
 {
-//    private $cache;
-//    private $markdown;
+    private $cache;
+    private $markdown;
 //    private $logger;
 //    private $isDebug;
 //
-//    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown, LoggerInterface $markdownLogger, bool $isDebug)
-//    {
-//        $this->cache = $cache;
-//        $this->markdown = $markdown;
+        // Arguments to the constructor are autowired
+    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown)
+    {
+        $this->cache = $cache;
+        $this->markdown = $markdown;
 //        $this->logger = $markdownLogger;
 //        $this->isDebug = $isDebug;
-//    }
+    }
 
     public function parse(string $source, AdapterInterface $cache, MarkdownInterface $markdown): string
     {
@@ -38,10 +39,10 @@ class MarkdownHelper
 //            return $this->markdown->transform($source);
 //        }
 
-        $item = $cache->getItem('markdown_'.md5($source));
+        $item = $this->cache->getItem('markdown_'.md5($source));
         if (!$item->isHit()) {
-            $item->set($markdown->transform($source));
-            $cache->save($item);
+            $item->set($this->markdown->transform($source));
+            $this->cache->save($item);
         }
 
         return $item->get();

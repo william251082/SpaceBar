@@ -8,12 +8,10 @@
 
 namespace App\Controller;
 
-use Michelf\Markdown;
 use Michelf\MarkdownInterface;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -33,7 +31,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/news/{slug}", name="article_show")
      */
-    public function show($slug, MarkdownInterface $markdown, AdapterInterface $cache, MarkdownHelper $markdownHelper)
+    public function show($slug, MarkdownHelper $markdownHelper)
     {
         $comments = [
             'I ate normal rock',
@@ -70,10 +68,7 @@ EOF;
 //            $cache->save($item);
 //        }
 
-        $articleContent = $markdownHelper->parse(
-            $articleContent,
-            $cache,
-            $markdown);
+        $articleContent = $markdownHelper->parse($articleContent);
         //dump($markdown);die;
 
 
