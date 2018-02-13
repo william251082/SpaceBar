@@ -17,6 +17,7 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+use App\Service\MarkdownHelper;
 
 
 class ArticleController extends AbstractController
@@ -32,7 +33,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/news/{slug}", name="article_show")
      */
-    public function show($slug, MarkdownInterface $markdown, AdapterInterface $cache)
+    public function show($slug, MarkdownInterface $markdown, AdapterInterface $cache, MarkdownHelper $markdownHelper)
     {
         $comments = [
             'I ate normal rock',
@@ -61,14 +62,18 @@ fugiat.
 EOF;
         //dump($cache);die;
         // Create item in memory
-        $item = $cache->getItem('markdown_'.md5($articleContent));
+//        $item = $cache->getItem('markdown_'.md5($articleContent));
+//
+//        $articleContent = $markdown->transform($articleContent);
+//        if(!$item->isHit()){
+//            $item->set($markdown->transform($articleContent));
+//            $cache->save($item);
+//        }
 
-        $articleContent = $markdown->transform($articleContent);
-        if(!$item->isHit()){
-            $item->set($markdown->transform($articleContent));
-            $cache->save($item);
-        }
-        $articleContent = $item->get();
+        $articleContent = $markdownHelper->parse(
+            $articleContent,
+            $cache,
+            $markdown);
         //dump($markdown);die;
 
 
